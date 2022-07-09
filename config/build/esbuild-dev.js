@@ -3,7 +3,7 @@ const path = require("path");
 
 const config = require('./esbuild-config');
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3000;
 
 ESBuild.serve({
     servedir: config.outdir,
@@ -11,5 +11,5 @@ ESBuild.serve({
 }, {
     ...config
 })
-    .then(() => console.log(`Server started on Port: ${PORT}`))
+    .then(() => console.log(`Server started on http://localhost:: ${PORT}`))
     .catch((error) => console.log(error))

@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "cross-env MODE=production node ./config/build/esbuild-prod.js",
-    "start": "node ./config/build/esbuild-dev.js"
+    "build": "cross-env MODE=production node config/build/esbuild-prod.js",
+    "start": "node config/build/esbuild-dev.js"
   },
   "keywords": [],
   "author": "",
