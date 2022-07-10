@@ -13,8 +13,14 @@ function resolverRoot(...segments: string[]) {
 const config: BuildOptions = {
     outdir: resolverRoot('build'),
     entryPoints: [resolverRoot('src', 'index.tsx')],
-    entryNames: 'bundle',
+    entryNames: '[dir]/bundle.[name]-[hash]',
+    allowOverwrite: true,
     bundle: true,
+    loader: {
+        '.png': 'file',
+        '.svg': 'file',
+        '.jpeg': 'file',
+    },
     tsconfig: resolverRoot('tsconfig.json'),
     minify: isProd,
     sourcemap: isDev
