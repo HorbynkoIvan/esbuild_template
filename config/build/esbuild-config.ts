@@ -1,5 +1,6 @@
 import path from "path";
 import {BuildOptions} from "esbuild";
+import {CleanPlugin} from "./plugins/CleanPlugin";
 
 const mode = process.env.MODE || 'development';
 
@@ -23,7 +24,8 @@ const config: BuildOptions = {
     },
     tsconfig: resolverRoot('tsconfig.json'),
     minify: isProd,
-    sourcemap: isDev
+    sourcemap: isDev,
+    plugins: [CleanPlugin]
 };
 
 export default config;
