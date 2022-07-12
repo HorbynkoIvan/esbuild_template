@@ -4,7 +4,7 @@ import {useState} from "react";
 import Gallery from './images/gallery.png';
 
 const App = () => {
-    const [count, setCount] = useState<number>(1)
+    const [count, setCount] = useState<number>(111)
 
     return (
         <>

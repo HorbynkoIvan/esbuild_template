@@ -25,7 +25,16 @@ const config: BuildOptions = {
     tsconfig: resolverRoot('tsconfig.json'),
     minify: isProd,
     sourcemap: isDev,
-    plugins: [CleanPlugin]
+    plugins: [CleanPlugin],
+    watch: isDev && {
+        onRebuild(err, result){
+            if(err){
+                console.log(err)
+            } else {
+                console.log('build...')
+            }
+        }
+    }
 };
 
 export default config;
