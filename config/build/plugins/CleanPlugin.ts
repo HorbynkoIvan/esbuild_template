@@ -16,9 +16,5 @@ export const CleanPlugin: Plugin = {
             }
 
         })
-
-        build.onEnd(() => {
-            console.log("onEnd")
-        })
     },
 }

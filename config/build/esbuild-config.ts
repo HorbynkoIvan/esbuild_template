@@ -1,6 +1,7 @@
 import path from "path";
 import {BuildOptions} from "esbuild";
 import {CleanPlugin} from "./plugins/CleanPlugin";
+import {HTMLPlugin} from "./plugins/HTMLPlugin";
 
 const mode = process.env.MODE || 'development';
 
@@ -25,7 +26,19 @@ const config: BuildOptions = {
     tsconfig: resolverRoot('tsconfig.json'),
     minify: isProd,
     sourcemap: isDev,
-    plugins: [CleanPlugin]
+    metafile: true,
+    plugins: [CleanPlugin, HTMLPlugin({
+        title: "ESBuild test"
+    })],
+    watch: isDev && {
+        onRebuild(err, result) {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log('build...')
+            }
+        }
+    }
 };
 
 export default config;
