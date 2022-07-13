@@ -1,6 +1,6 @@
 import React from "react";
 import {useState} from "react";
-
+import "./index.css";
 import Gallery from './images/gallery.png';
 
 const App = () => {
