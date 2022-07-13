@@ -30,15 +30,6 @@ const config: BuildOptions = {
     plugins: [CleanPlugin, HTMLPlugin({
         title: "ESBuild test"
     })],
-    watch: isDev && {
-        onRebuild(err, result) {
-            if (err) {
-                console.log(err)
-            } else {
-                console.log('build...')
-            }
-        }
-    }
 };
 
 export default config;

@@ -31,12 +31,20 @@ const renderHTML = (options: HTMLPluginOptions) => {
                 <meta charset="UTF-8">
                 <title>${options.title}</title>
                 ${options.cssPath?.map((path) =>
-        `<link href=${path} rel="stylesheet"/>`).join(" ")}
+        `<link href="${path}" rel="stylesheet"/>`).join(" ")}
             </head>
             <body>
                 <div id="root"></div>
-                ${options.jsPath?.map((path) =>
-        `<script src=${path}></script>`).join(" ")}
+                ${options.jsPath?.map((path) => `<script src="${path}"></script>`).join(" ")}
+                <script>
+                    const eventSource = new EventSource('http://localhost:3001/subscribe')
+                    eventSource.onopen = function (){console.log('open')}
+                    eventSource.onerror = function (){console.log('error')}
+                    eventSource.onmessage = function (){
+                        console.log('message');
+                        window.location.reload();
+                    }
+                </script>
             </body>
         </html>`
 }
@@ -58,11 +66,10 @@ export const HTMLPlugin = (options: HTMLPluginOptions): Plugin => {
             build.onEnd(async (result) => {
                 // console.log(result.metafile)
                 const outputs = result.metafile?.outputs;
-                // console.log(Object.keys(outputs || {}))
                 const [jsPath, cssPath] = preparePaths(Object.keys(outputs || {}));
 
-                console.log(jsPath)
-                console.log(cssPath)
+                // console.log(jsPath)
+                // console.log(cssPath)
                 if (outdir) {
                     await writeFile(path.resolve(outdir, 'index.html'),
                         renderHTML({jsPath, cssPath, ...options})
